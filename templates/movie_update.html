@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Editar Pelicula</h1>
+    </div>
+    <form action="{{ url_for('update') }}" method="post">
+
+        <div class="mb-3">
+            <label for="title">Titulo:</label>
+            <input type="text" class="form-control" name="title" value="{{ movie.1 }}" id="title">
+        </div>
+        <div class="mb-3">
+            <label for="poster">Poster:</label>
+            <input type="text" class="form-control" name="poster"
+                   value="{{ movie.2 }}" id="poster">
+        </div>
+        <div class="mb-3">
+            <img src="{{ movie.2 }}" alt="poster image"
+                 style="width: 100px; height: 150px">
+        </div>
+        <div class="mb-3">
+            <label for="trailer">Trailer:</label>
+            <input type="text" class="form-control" value="{{ movie.3 }}" name="trailer" id="trailer">
+        </div>
+        <div class="mb-3">
+            <label for="year">Fecha:</label>
+            <input type="text" class="form-control" value="{{ movie.4 }}" name="year" id="year">
+        </div>
+        <div class="mb-3">
+            <label for="language">Idioma:</label>
+            <input type="text" class="form-control" value="{{ movie.5 }}" name="language" id="language">
+        </div>
+        <div class="mb-3">
+            <label for="rated">Clasificacion</label>
+            <input type="text" class="form-control" value="{{ movie.6 }}" name="rated" id="rated">
+        </div>
+        <div class="mb-3">
+            <label for="runtime">Duracion:</label>
+            <input type="text" class="form-control" value="{{ movie.7 }}" name="runtime" id="runtime">
+        </div>
+        <div class="mb-3">
+            <label for="description">Descripcion:</label>
+                <textarea name="description" id="description" cols="30" rows="10"
+                          class="form-control">{{ movie.8 }}</textarea>
+        </div>
+        <input type="hidden" name="id" value="{{ movie.0 }}">
+        <div class="mb-3">
+            <button class="btn btn-info">Actualizar</button>
+        </div>
+    </form>
+{% endblock %}

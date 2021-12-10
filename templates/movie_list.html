@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    <p class="lead text-center">{{ message }}</p>
+                </div>
+            {% endfor %}
+
+        {% endif %}
+    {% endwith %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Lista De Peliculas</h1>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">TITULO</th>
+                <th scope="col">POSTER</th>
+                <th scope="col">TRAILER</th>
+                <th scope="col">FECHA</th>
+                <th scope="col">IDIOMA</th>
+                <th scope="col">CLASIFICACION</th>
+                <th scope="col">DURACION</th>
+                <th scope="col">DETALLES</th>
+                <th scope="col">ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for movie in movies %}
+                <tr class="table-active">
+                    <th scope="row">{{ movie.0 }}</th>
+                    <td>{{ movie.1 }}</td>
+                    <td><img src="{{ movie.2 }}" alt="{{ movie.1 }}"
+                             style="width: 100px; height: 170px; border-radius: 5px"></td>
+                    <td>{{ movie.3 }}</td>
+                    <td>{{ movie.4 }}</td>
+                    <td>{{ movie.5 }}</td>
+                    <td>{{ movie.6 }}</td>
+                    <td>{{ movie.7 }}</td>
+                    <td>{{ movie.8 }}</td>
+                    <td><a href="{{ url_for('edit', id=movie.0) }}">Editar</a>-<a
+                            href="{{ url_for('delete', id=movie.0) }}"
+                            onclick="return confirm('La pelicula se eliminara estas seguro?')"><span
+                            class="text-danger">Eliminar</span></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+    </div>
+
+    <form action="/" class="mb-3" id="form-1" method="GET">
+        <div class="row">
+            <p>Agrega el id (TMDB) de la pelicula para autocompletar los datos:</p>
+            <div class="col-auto">
+                <input type="text" class="form-control" name="get_movie_id">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-info">Confirmar</button>
+            </div>
+        </div>
+    </form>
+    {% if movie %}
+        <form action="{{ url_for('index') }}" method="post">
+
+            <div class="mb-3">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" name="title" value="{{ movie.title }}" id="title">
+            </div>
+            <div class="mb-3">
+                <label for="poster">Poster:</label>
+                <input type="text" class="form-control" name="poster"
+                       value="{{ movie.medium_cover_image }}" id="poster">
+            </div>
+            <div class="mb-3">
+                <img src="{{ movie.medium_cover_image }}" alt="poster image"
+                     style="width: 100px; height: 150px">
+            </div>
+            <div class="mb-3">
+                <label for="trailer">Trailer:</label>
+                <input type="text" class="form-control" value="{{ movie.yt_trailer_code }}" name="trailer" id="trailer">
+            </div>
+            <div class="mb-3">
+                <label for="year">Fecha:</label>
+                <input type="text" class="form-control" value="{{ movie.year }}" name="year" id="year">
+            </div>
+            <div class="mb-3">
+                <label for="language">Idioma:</label>
+                <input type="text" class="form-control" value="{{ movie.language }}" name="language" id="language">
+            </div>
+            <div class="mb-3">
+                <label for="rated">Clasificacion:</label>
+                <input type="text" class="form-control" value="{{ movie.mpa_rating }}" name="rated" id="rated">
+            </div>
+            <div class="mb-3">
+                <label for="runtime">Duracion:</label>
+                <input type="text" class="form-control" value="{{ movie.runtime }}" name="runtime" id="runtime">
+            </div>
+            <div class="mb-3">
+                <label for="description">Descripcion:</label>
+                <textarea name="description" id="description" cols="30" rows="10"
+                          class="form-control">{{ movie.description_full }}</textarea>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Publicar</button>
+            </div>
+        </form>
+    {% else %}
+        <form action="{{ url_for('index') }}" method="post">
+            <div class="mb-3">
+                <label for="title">Titulo:</label>
+                <input type="text" class="form-control" name="title" id="title">
+                {% if error %}
+                    <div class="alert alert-warning my-1" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="poster">Poster:</label>
+                <input type="text" class="form-control" name="poster" id="poster">
+            </div>
+            <div class="mb-3">
+                <label for="trailer">Trailer:</label>
+                <input type="text" class="form-control" name="trailer" id="trailer">
+            </div>
+            <div class="mb-3">
+                <label for="year">Fecha:</label>
+                <input type="text" class="form-control" name="year" id="year">
+            </div>
+            <div class="mb-3">
+                <label for="language">Idioma:</label>
+                <input type="text" class="form-control" name="language" id="language">
+            </div>
+            <div class="mb-3">
+                <label for="rated">Clasificacion:</label>
+                <input type="text" class="form-control" name="rated" id="rated">
+            </div>
+            <div class="mb-3">
+                <label for="runtime">Duracion:</label>
+                <input type="text" class="form-control" name="runtime" id="runtime">
+            </div>
+            <div class="mb-3">
+                <label for="description">Descripcion:</label>
+                <textarea name="description" cols="30" rows="10" id="description"
+                          class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Publicar</button>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}
